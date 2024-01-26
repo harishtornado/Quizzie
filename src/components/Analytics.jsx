@@ -345,9 +345,6 @@ const DeleteModal = ({ setQuizId, quizId }) => {
 
 const UpdateModal = ({ quiz, setModal, setCurrQuiz }) => {
     const { fetchQuiz } = useData()
-
-    console.log(quiz)
-
     const updateQuiz = async () => {
         if (quiz) {
             try {
