@@ -66,7 +66,7 @@ const Analytics = ({ updateToast }) => {
                                                             />
                                                         </td>
                                                         <td>
-                                                            <CopyToClipboard text={`${process.env.REACT_APP_URL}/quiz/${quiz._id}`}>
+                                                            <CopyToClipboard text={`${process.env.REACT_APP_URL}/#/quiz/${quiz._id}`}>
                                                                 <img
                                                                     src={require('../assets/icons/share.png')}
                                                                     alt="share"
