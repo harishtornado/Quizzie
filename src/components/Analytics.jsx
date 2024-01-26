@@ -315,8 +315,6 @@ const Edit = ({ currQuiz, setCurrQuiz }) => {
 
 const DeleteModal = ({ setQuizId, quizId }) => {
     const { fetchQuiz } = useData()
-
-    console.log(quizId)
     const deleteQuiz = async () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/quiz/deleteQuiz/${quizId}`, {
@@ -324,8 +322,7 @@ const DeleteModal = ({ setQuizId, quizId }) => {
                 headers: { 'Content-Type': 'application/json' }
             })
             const data = await response.json()
-            if (data.status === 'ok') {
-                console.log(data)
+            if (response.ok) {
                 setQuizId(null)
                 fetchQuiz()
             }
