@@ -25,10 +25,8 @@ const SignIn = () => {
                         password: passwordRef.current.value
                     })
                 })
-                console.log(response)
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data)
                     if(data.status === 'ok'){
                         updateUserData(data.data)
                         navigate('/dashboard')
