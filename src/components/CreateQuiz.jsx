@@ -64,7 +64,7 @@ const CreateQuiz = ({ changeTab, updateToast }) => {
 
 
 const Modal3 = ({ changeTab, quizData, updateToast }) => {
-    const [link] = useState(`${process.env.REACT_APP_URL}/quiz/${quizData._id}` || null)
+    const [link] = useState(`${process.env.REACT_APP_URL}/#/quiz/${quizData._id}` || null)
 
     return (
         <div className='modal_container2'>
