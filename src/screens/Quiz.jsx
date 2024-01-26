@@ -21,7 +21,7 @@ const Quiz = () => {
         const fetchQuiz = async () => {
             setIsLoading(true)
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}quiz/getQuiz/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/quiz/getQuiz/${id}`, {
                     method: 'GET',
                     header: {
                         'Context-type': 'application/json'
