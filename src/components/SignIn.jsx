@@ -36,7 +36,7 @@ const SignIn = () => {
                     }
                 }
                 else {
-                    setError(data.message)
+                    setError('Login failed')
                 }
             }
         }
