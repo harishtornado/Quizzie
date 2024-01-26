@@ -26,7 +26,7 @@ const SignIn = () => {
                     })
                 })
                 const data = await response.json();
-                if (data.status === 'ok') {
+                if (response.status === 200) {
                     console.log(data)
                     updateUserData(data.data)
                     navigate('/dashboard')
