@@ -53,7 +53,7 @@ const DashBoard = ({ updateToast }) => {
                     quizData?.length > 0 ? (
                         <div className='quizzes'>
                             {
-                                quizData?.map(quiz => (
+                                quizData?.map(quiz =>  quiz.impressions > 10 && (
                                     <CopyToClipboard text={`${process.env.REACT_APP_URL}/#/quiz/${quiz._id}`}>
                                         <div className='quiz_box' key={quiz._id} onClick={() => updateToast('Link copied to clipboard')}>
                                             <div className='header'>
