@@ -10,7 +10,7 @@ const SignIn = () => {
     const [error, setError] = useState()
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
-    const login = async (e) => {
+     const login = async (e) => {
         e.preventDefault()
         setIsLoading(true)
         try {
@@ -25,16 +25,14 @@ const SignIn = () => {
                         password: passwordRef.current.value
                     })
                 })
+                const data = await response.json();
                 if (response.ok) {
-                    const data = await response.json();
-                    if(data.status === 'ok'){
-                        updateUserData(data.data)
-                        navigate('/dashboard')
-                        setError('')
-                    }
+                    updateUserData(data.data)
+                    navigate('/dashboard')
+                    setError('')
                 }
                 else {
-                    setError('Login failed')
+                    setError(data.message)
                 }
             }
         }
