@@ -180,7 +180,7 @@ const Question = ({ quizData, setNewData, data, changeQuestion, submitQuiz, corr
                 <div className="options">
                     {
                         data?.options.map((option, index) => (
-                            <div className={`option ${answer === index ? 'choosen' : null} `} key={index} onClick={() => setAnswer(index)}>{
+                            <div className={`option ${answer === index ? 'choosen' : null} `} style={{ padding: data?.optionType === 'url' ? '' : '1em' }} key={index} onClick={() => setAnswer(index)}>{
                                 (data.optionType === 'text' || data.optionType === 'text and url') &&
                                 <div className='text'>{option.text}</div>
                             }{
