@@ -27,11 +27,11 @@ const Quiz = () => {
                         'Context-type': 'application/json'
                     }
                 })
-                const data = await response.json()
-                if (data.status === 'ok') {
+                if (response.ok) {
+                    const data = await response.json()
                     setQuizData(data.data)
                     setIsLoading(false)
-                    setCurrQuestion(data.data.questions[0])
+                    setCurrQuestion(data.data?.questions[0])
                 }
                 else {
                     console.log("error")
@@ -40,6 +40,7 @@ const Quiz = () => {
             }
             catch (err) {
                 console.error(err)
+                navigate('/notfound')
             }
         }
         fetchQuiz()
@@ -59,7 +60,7 @@ const Quiz = () => {
     }, [currQuestion, startQuiz, isCompleted])
 
     useEffect(() => {
-        if (isCompleted && finalData.length === quizData.questions.length) {
+        if (isCompleted && finalData.length === quizData?.questions?.length) {
             console.log({
                 ...quizData, impressions: quizData?.impressions + 1, questions: [...finalData]
             })
@@ -85,7 +86,7 @@ const Quiz = () => {
     }
 
     const changeQuestion = () => {
-        if (quizData?.questions.indexOf(currQuestion) < quizData?.questions.length - 1) {
+        if (quizData?.questions?.indexOf(currQuestion) < quizData?.questions?.length - 1) {
             setCurrQuestion(quizData?.questions[quizData?.questions?.indexOf(currQuestion) + 1])
         }
         else {
@@ -139,7 +140,7 @@ const Question = ({ quizData, setNewData, data, changeQuestion, submitQuiz, corr
 
     const updateData = () => {
         if (answer !== null) {
-            setNewData({ ...data, impressions: data?.impressions + 1, options: data?.options.map((option, index) => answer === index ? { ...option, chosen: option.chosen + 1 } : option), correctAnswers: answer === data?.correctOption ? data.correctAnswers + 1 : 0 })
+            setNewData({ ...data, impressions: data?.impressions + 1, options: data?.options.map((option, index) => answer === index ? { ...option, chosen: option.chosen + 1 } : option), correctAnswers: answer === data?.correctOption ? data?.correctAnswers + 1 : 0 })
         }
     }
 
@@ -181,18 +182,18 @@ const Question = ({ quizData, setNewData, data, changeQuestion, submitQuiz, corr
                     {
                         data?.options.map((option, index) => (
                             <div className={`option ${answer === index ? 'choosen' : null} `} style={{ padding: data?.optionType === 'url' ? '' : '1em' }} key={index} onClick={() => setAnswer(index)}>{
-                                (data.optionType === 'text' || data.optionType === 'text and url') &&
+                                (data?.optionType === 'text' || data?.optionType === 'text and url') &&
                                 <div className='text'>{option.text}</div>
                             }{
-                                    (data.optionType === 'url' || data.optionType === 'text and url') &&
-                                    <div className='image'><img src={option.url} alt='option' /></div>
+                                    (data?.optionType === 'url' || data?.optionType === 'text and url') &&
+                                    <div className='image' style={{ overflow: data?.optionType !== 'url' ? 'hidden' : '' }}><img src={option.url} alt='option' /></div>
                                 }
                             </div>
                         ))
                     }
                 </div>
                 {
-                    quizData?.questions.indexOf(data) === quizData.questions.length - 1 ? (
+                    quizData?.questions?.indexOf(data) === quizData?.questions?.length - 1 ? (
                         <div className="next_btn" onClick={() => submitQuiz()}>SUBMIT</div>
                     ) : (
                         <div className="next_btn" onClick={() => changeQuestion()}>NEXT</div>
@@ -200,7 +201,7 @@ const Question = ({ quizData, setNewData, data, changeQuestion, submitQuiz, corr
                 }
             </div>
         ) : (
-            <EndOfQuiz quizType={quizData?.quizType} correctAnswerCount={correctAnswerCount} count={quizData.questions.length} />
+            <EndOfQuiz quizType={quizData?.quizType} correctAnswerCount={correctAnswerCount} count={quizData?.questions?.length} />
         )
     )
 
